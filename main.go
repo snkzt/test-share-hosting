@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"os"
 )
 
 // Handle incoming HTTP requests
@@ -24,6 +25,12 @@ func main() {
 	// "/" means this handler will respond to all requests that hit the root URL of the server
 	// Whenever a client makes a request to "/", this handler func will be called and process the request
 	http.HandleFunc("/", handler)
+
+	port := os.Getenv("PORT")
+	if port == "" {
+		port = "10000"
+	}
+
 	// Conventional message logging indicating the server is about to start
 	// log is a simple way to log information to the console, adding a timestamp automatically
 	log.Println("Server is starting on port 10000")
