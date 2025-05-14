@@ -12,12 +12,25 @@ import (
 // would be inefficient in terms of memory and performance hence passed by reference
 // this will allow handler function to access and modify the request efficiently
 func handler(w http.ResponseWriter, r *http.Request) {
-	// r (http.Request) object contains all the information about
-	// the incoming HTTP request and we use the information with logging
-	log.Printf("Received request: %s %s", r.Method, r.URL.Path)
 	// w (http.ResponseWriter) is an interface that allows us
 	// to send a response to the client
 	fmt.Fprintln(w, "Hello from Go on Render")
+
+	// r (http.Request) object contains all the information about
+	// the incoming HTTP request and we use the information with logging
+	// Log details to verify reverse proxy
+	log.Println("---- Incoming Request ----")
+	log.Printf("RemoteAddr: %s\n", r.RemoteAddr)
+	log.Printf("Host: %s\n", r.Host)
+	log.Printf("Method: %s\n", r.Method)
+	log.Printf("URL: %s\n", r.URL.Path)
+	log.Println("Headers:")
+	for name, values := range r.Header {
+		for _, value := range values {
+			log.Printf("%s: %s\n", name, value)
+		}
+	}
+	log.Println("--------------------------")
 }
 
 func main() {
