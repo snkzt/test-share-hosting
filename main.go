@@ -51,7 +51,7 @@ func main() {
 	// This tells the server to listen on port 10000 for HTTP requests
 	// ":10000" means listen on port 10000 on all available network interfaces
 	// nil indicates that the handler defined ealier with http.HandleFunc will be used
-	log.Fatal(http.ListenAndServe(":10000", nil))
+	log.Fatal(http.ListenAndServe(":"+port, nil))
 	// If server fails to start, it logs the error and stops the programme
 	// This is conventional and the execution should be stopped at this step
 	// If no error, nothing happen and process will go on
